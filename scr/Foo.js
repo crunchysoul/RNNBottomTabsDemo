@@ -18,16 +18,18 @@ export default class Foo extends React.Component {
           onPress={this.modalViewOnBoardingScreen}
           disabled={false}
         >
-          <Text style={styles.button}>Modal OnBoardingScreen</Text>
+          <Text style={styles.button}>Modal</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.goToPushedView}>
+          <Text style={styles.button}>Push</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={this.modalViewNearyByScreen}
           disabled={false}
         >
-          <Text style={styles.button}>Modal NearbyScreen</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.goToPushedView}>
-          <Text style={styles.button}>Push QuaScreen</Text>
+          <Text style={styles.button}>SideMenu</Text>
         </TouchableOpacity>
       </View>
     );
