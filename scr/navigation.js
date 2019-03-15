@@ -28,7 +28,7 @@ export const toMain = () =>
                 bottomTab: {
                   fontSize: 12,
                   text: 'Foo',
-                  icon: settingsIconIon,
+                  icon: visaIconFontAwesome,
                 },
               },
             },
@@ -40,7 +40,7 @@ export const toMain = () =>
                 bottomTab: {
                   text: 'Bar',
                   fontSize: 12,
-                  icon: cogIconIon,
+                  icon: mastercardIconFontAwesome,
                 },
               },
             },
@@ -52,7 +52,7 @@ export const toMain = () =>
                 bottomTab: {
                   text: 'Baz',
                   fontSize: 12,
-                  icon: peopleIconIon,
+                  icon: amexIconFontAwesome,
                 },
               },
             },
@@ -64,7 +64,7 @@ export const toMain = () =>
                 bottomTab: {
                   text: 'Qux',
                   fontSize: 12,
-                  icon: userIconAnt,
+                  icon: paypalIconFontAwesome,
                 },
               },
             },

@@ -47,7 +47,7 @@ export default class Foo extends React.Component {
                       rightButtons: [
                         {
                           id: 'BtnQuuxTopBarRight',
-                          icon: cogIconIon,
+                          icon: closeIconAnt,
                         },
                       ],
                       title: {
