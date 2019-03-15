@@ -12,5 +12,5 @@ export const registerScreens = () => {
   Navigation.registerComponent(`FooScreen`, () => Foo);
   Navigation.registerComponent(`BarScreen`, () => Bar);
   Navigation.registerComponent(`BazScreen`, () => Baz);
-  Navigation.registerComponent(`QuxScreen`, () => Baz);
+  Navigation.registerComponent(`QuxScreen`, () => Qux);
 };
