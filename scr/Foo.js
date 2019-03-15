@@ -13,6 +13,22 @@ export default class Foo extends React.Component {
           {this.constructor.name}
           .js
         </Text>
+
+        <TouchableOpacity
+          onPress={this.modalViewOnBoardingScreen}
+          disabled={false}
+        >
+          <Text style={styles.button}>Modal OnBoardingScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={this.modalViewNearyByScreen}
+          disabled={false}
+        >
+          <Text style={styles.button}>Modal NearbyScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.goToPushedView}>
+          <Text style={styles.button}>Push QuaScreen</Text>
+        </TouchableOpacity>
       </View>
     );
   }

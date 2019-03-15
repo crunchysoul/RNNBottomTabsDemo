@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -20,10 +20,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#F83459',
     borderRadius: 8,
     color: 'white',
+    width: Dimensions.get('window').width * 0.9,
     fontSize: 16,
     fontWeight: 'bold',
     overflow: 'hidden',
     padding: 15,
+    margin: 5,
     paddingHorizontal: 80,
     textAlign: 'center',
   },
