@@ -7,7 +7,7 @@ export default class Qux extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.h1}>
           {this.constructor.name}
           ::src/screens/
           {this.constructor.name}

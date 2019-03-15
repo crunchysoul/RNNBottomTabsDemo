@@ -6,10 +6,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  h1: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
   instructions: {
     textAlign: 'center',
