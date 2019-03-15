@@ -6,7 +6,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
       component: {
-        name: 'FooScreen',
+        name: 'InitialScreen',
       },
     },
   });
