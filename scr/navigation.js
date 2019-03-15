@@ -22,15 +22,26 @@ export const toMain = () =>
         id: 'BottomTabsId',
         children: [
           {
-            component: {
-              name: 'FooScreen',
-              options: {
-                bottomTab: {
-                  fontSize: 12,
-                  text: 'Foo',
-                  icon: visaIconFontAwesome,
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'FooScreen',
+                    options: {
+                      bottomTab: {
+                        fontSize: 12,
+                        text: 'Foo',
+                        icon: visaIconFontAwesome,
+                      },
+                    },
+                  },
                 },
-              },
+                {
+                  component: {
+                    name: 'QuuxScreen',
+                  },
+                },
+              ],
             },
           },
           {

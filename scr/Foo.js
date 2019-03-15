@@ -14,9 +14,9 @@ export default class Foo extends React.Component {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'QuuxScreen',
-        passProps: {
-          text: 'Pushed screen',
-        },
+        // passProps: {
+        //   text: 'Pushed screen',
+        // },
         options: {
           topBar: {
             title: {
