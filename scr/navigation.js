@@ -1,32 +1,6 @@
 import { Navigation } from 'react-native-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { registerScreens } from './screens';
-
-// setup use react-native-vector-icons
-const initIcons = () => {
-  return new Promise((resolve, reject) => {
-    Promise.all([
-      Icon.getImageSource('ios-settings', 30),
-      Icon.getImageSource('ios-settings-outline', 30),
-      Icon.getImageSource('ios-people', 30),
-      Icon.getImageSource('ios-navigate-outline', 30),
-      Icon.getImageSource('ios-navigate', 30),
-    ])
-      .then((values) => {
-        settingsIcon = values[0];
-        settingsOutlineIcon = values[1];
-        peopleIcon = values[2];
-        iosNavigateOutline = values[3];
-        iosNavigate = values[4];
-        resolve(true);
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      })
-      .done();
-  });
-};
+import { initIcons } from './icons';
 
 export const startTabs = () => {
   registerScreens();
@@ -54,7 +28,7 @@ export const toMain = () =>
                 bottomTab: {
                   fontSize: 12,
                   text: 'Foo',
-                  icon: peopleIcon,
+                  icon: settingsIconIon,
                 },
               },
             },
@@ -66,7 +40,7 @@ export const toMain = () =>
                 bottomTab: {
                   text: 'Bar',
                   fontSize: 12,
-                  icon: peopleIcon,
+                  icon: cogIconIon,
                 },
               },
             },
@@ -78,7 +52,19 @@ export const toMain = () =>
                 bottomTab: {
                   text: 'Baz',
                   fontSize: 12,
-                  icon: peopleIcon,
+                  icon: peopleIconIon,
+                },
+              },
+            },
+          },
+          {
+            component: {
+              name: 'QuxScreen',
+              options: {
+                bottomTab: {
+                  text: 'Qux',
+                  fontSize: 12,
+                  icon: userIconAnt,
                 },
               },
             },
