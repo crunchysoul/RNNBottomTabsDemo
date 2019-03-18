@@ -13,10 +13,11 @@ export default class Foo extends React.Component {
     console.log('goToPushedView CLICKED');
     Navigation.push(this.props.componentId, {
       component: {
+        // name: RouterConstants.SecondScreen,
         name: 'QuuxScreen',
-        // passProps: {
-        //   text: 'Pushed screen',
-        // },
+        passProps: {
+          text: 'Pushed screen',
+        },
         options: {
           topBar: {
             title: {

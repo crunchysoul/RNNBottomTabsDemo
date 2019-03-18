@@ -27,6 +27,7 @@ export const toMain = () =>
                 {
                   component: {
                     name: 'FooScreen',
+                    id: 'FooScreenId',
                     options: {
                       bottomTab: {
                         fontSize: 12,
@@ -36,17 +37,19 @@ export const toMain = () =>
                     },
                   },
                 },
-                {
-                  component: {
-                    name: 'QuuxScreen',
-                  },
-                },
+                // {
+                //   component: {
+                //     name: 'QuuxScreen',
+                //     id: 'QuuxScreenId',
+                //   },
+                // },
               ],
             },
           },
           {
             component: {
               name: 'BarScreen',
+              id: 'BarScreenId',
               options: {
                 bottomTab: {
                   text: 'Bar',
@@ -59,6 +62,7 @@ export const toMain = () =>
           {
             component: {
               name: 'BazScreen',
+              id: 'BazScreenId',
               options: {
                 bottomTab: {
                   text: 'Baz',
@@ -71,6 +75,7 @@ export const toMain = () =>
           {
             component: {
               name: 'QuxScreen',
+              id: 'QuxScreenId',
               options: {
                 bottomTab: {
                   text: 'Qux',
