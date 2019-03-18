@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { styles } from './styles';
 

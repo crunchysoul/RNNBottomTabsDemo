@@ -18,16 +18,15 @@ export const startTabs = () => {
 export const toMain = () =>
   Navigation.setRoot({
     root: {
-      bottomTabs: {
-        id: 'BottomTabsId',
+      stack: {
         children: [
           {
-            stack: {
+            bottomTabs: {
+              id: 'BottomTabsId',
               children: [
                 {
                   component: {
                     name: 'FooScreen',
-                    id: 'FooScreenId',
                     options: {
                       bottomTab: {
                         fontSize: 12,
@@ -37,52 +36,49 @@ export const toMain = () =>
                     },
                   },
                 },
-                // {
-                //   component: {
-                //     name: 'QuuxScreen',
-                //     id: 'QuuxScreenId',
-                //   },
-                // },
+                {
+                  component: {
+                    name: 'BarScreen',
+                    options: {
+                      bottomTab: {
+                        text: 'Bar',
+                        fontSize: 12,
+                        icon: mastercardIconFontAwesome,
+                      },
+                    },
+                  },
+                },
+                {
+                  component: {
+                    name: 'BazScreen',
+                    options: {
+                      bottomTab: {
+                        text: 'Baz',
+                        fontSize: 12,
+                        icon: amexIconFontAwesome,
+                      },
+                    },
+                  },
+                },
+                {
+                  component: {
+                    name: 'QuxScreen',
+                    options: {
+                      bottomTab: {
+                        text: 'Qux',
+                        fontSize: 12,
+                        icon: paypalIconFontAwesome,
+                      },
+                    },
+                  },
+                },
               ],
             },
           },
           {
             component: {
-              name: 'BarScreen',
-              id: 'BarScreenId',
-              options: {
-                bottomTab: {
-                  text: 'Bar',
-                  fontSize: 12,
-                  icon: mastercardIconFontAwesome,
-                },
-              },
-            },
-          },
-          {
-            component: {
-              name: 'BazScreen',
-              id: 'BazScreenId',
-              options: {
-                bottomTab: {
-                  text: 'Baz',
-                  fontSize: 12,
-                  icon: amexIconFontAwesome,
-                },
-              },
-            },
-          },
-          {
-            component: {
-              name: 'QuxScreen',
-              id: 'QuxScreenId',
-              options: {
-                bottomTab: {
-                  text: 'Qux',
-                  fontSize: 12,
-                  icon: paypalIconFontAwesome,
-                },
-              },
+              name: 'QuuxScreen',
+              id: 'QuuxScreenId',
             },
           },
         ],

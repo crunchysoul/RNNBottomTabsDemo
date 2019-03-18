@@ -1,8 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { styles } from './styles';
 import { initIcons } from './icons';
+import { toBottomLess } from './navigation';
 
 export default class Foo extends React.Component {
   componentDidMount() {
@@ -10,7 +18,6 @@ export default class Foo extends React.Component {
   }
 
   toPushView = () => {
-    console.log('goToPushedView CLICKED');
     Navigation.push(this.props.componentId, {
       component: {
         // name: RouterConstants.SecondScreen,
@@ -19,6 +26,28 @@ export default class Foo extends React.Component {
           text: 'Pushed screen',
         },
         options: {
+          topBar: {
+            title: {
+              text: 'Pushed screen title',
+            },
+          },
+        },
+      },
+    });
+  };
+
+  toPushViewBottomLess = () => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        // name: RouterConstants.SecondScreen,
+        name: 'QuuxScreen',
+        passProps: {
+          text: 'Pushed screen',
+        },
+        options: {
+          bottomTabs: {
+            visible: false,
+          },
           topBar: {
             title: {
               text: 'Pushed screen title',
@@ -83,6 +112,10 @@ export default class Foo extends React.Component {
 
         <TouchableOpacity onPress={this.toPushView}>
           <Text style={styles.button}>Push</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.toPushViewBottomLess}>
+          <Text style={styles.button}>Push Bottom Less</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
