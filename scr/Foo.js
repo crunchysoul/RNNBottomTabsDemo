@@ -14,6 +14,8 @@ import { toBottomLess } from './navigation';
 import {
   MainStackTopBar,
   TestStackTopBar,
+  TestFooStackTopBar,
+  TestBarStackTopBar,
   NoTopBar,
   InvisiableStackTopBar,
 } from './MainStackTopBar';
@@ -34,7 +36,8 @@ export default class Foo extends React.Component {
         options: {
           // topBar: NoTopBar,
           // topBar: InvisiableStackTopBar,
-          topBar: TestStackTopBar,
+          // topBar: TestStackTopBar,
+          topBar: TestBarStackTopBar,
         },
       },
     });
@@ -49,7 +52,7 @@ export default class Foo extends React.Component {
           text: 'Pushed screen',
         },
         options: {
-          topBar: MainStackTopBar,
+          topBar: InvisiableStackTopBar,
         },
       },
     });

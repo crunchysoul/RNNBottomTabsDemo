@@ -43,6 +43,14 @@ export const TestFooStackTopBar = {
   },
 };
 
+export const TestBarStackTopBar = {
+  visible: true,
+  drawBehind: true,
+  title: {
+    text: 'YOLO',
+  },
+};
+
 export const NoTopBar = {
   visible: false,
 };

@@ -25,10 +25,13 @@ export const startTabs = () => {
 export const toMain = () =>
   Navigation.setRoot({
     root: {
+      // NOTE XXX XXX XXX XXX XXX XXX
+      // Stack Level 1, global level:
+      // { bottomTabs || QuuxScreen }
       stack: {
         id: 'MainStackId',
         options: {
-          topBar: MainStackTopBar,
+          topBar: NoTopBar,
         },
         children: [
           {
@@ -36,10 +39,13 @@ export const toMain = () =>
               id: 'BottomTabsId',
               children: [
                 {
+                  // NOTE XXX XXX XXX XXX XXX XXX
+                  // Stack Level 2, local level:
+                  // { FooScreen || ... }
                   stack: {
                     id: 'FooStackId',
                     options: {
-                      topBar: TestStackTopBar,
+                      topBar: NoTopBar,
                     },
                     children: [
                       {
@@ -51,7 +57,9 @@ export const toMain = () =>
                               text: 'Foo',
                               icon: visaIconFontAwesome,
                             },
-                            topBar: TestFooStackTopBar,
+                            // NOTE XXX XXX XXX XXX XXX XXX
+                            // Component Level TopBar:
+                            topBar: NoTopBar,
                           },
                         },
                       },
@@ -72,6 +80,7 @@ export const toMain = () =>
                               icon: mastercardIconFontAwesome,
                             },
                             // topBar: MainStackTopBar,
+                            topBar: TestFooStackTopBar,
                           },
                         },
                       },
@@ -91,6 +100,7 @@ export const toMain = () =>
                               fontSize: 12,
                               icon: amexIconFontAwesome,
                             },
+                            topBar: TestFooStackTopBar,
                             // topBar: MainStackTopBar,
                           },
                         },
@@ -111,6 +121,7 @@ export const toMain = () =>
                               fontSize: 12,
                               icon: paypalIconFontAwesome,
                             },
+                            topBar: TestFooStackTopBar,
                             // topBar: MainStackTopBar,
                           },
                         },
