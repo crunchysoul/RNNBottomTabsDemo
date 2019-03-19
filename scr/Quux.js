@@ -11,6 +11,16 @@ import { Navigation } from 'react-native-navigation';
 import { styles } from './styles';
 
 export default class Quux extends React.Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        drawBehind: true,
+        visible: false,
+        animate: false,
+      },
+    };
+  }
+
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
   }

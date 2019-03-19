@@ -7,6 +7,7 @@ import Bar from './Bar';
 import Baz from './Baz';
 import Qux from './Qux';
 import Quux from './Quux';
+import Quuz from './Quuz';
 
 export const registerScreens = () => {
   Navigation.registerComponent(`InitialScreen`, () => Initial);
@@ -15,4 +16,5 @@ export const registerScreens = () => {
   Navigation.registerComponent(`BazScreen`, () => Baz);
   Navigation.registerComponent(`QuxScreen`, () => Qux);
   Navigation.registerComponent(`QuuxScreen`, () => Quux);
+  Navigation.registerComponent(`QuuzScreen`, () => Quuz);
 };

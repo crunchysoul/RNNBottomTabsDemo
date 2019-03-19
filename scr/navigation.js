@@ -19,21 +19,45 @@ export const toMain = () =>
   Navigation.setRoot({
     root: {
       stack: {
+        id: 'MainStackId',
         children: [
           {
+            topBar: {
+              visible: false,
+            },
             bottomTabs: {
               id: 'BottomTabsId',
               children: [
                 {
-                  component: {
-                    name: 'FooScreen',
-                    options: {
-                      bottomTab: {
-                        fontSize: 12,
-                        text: 'Foo',
-                        icon: visaIconFontAwesome,
+                  stack: {
+                    id: 'FooStackId',
+                    children: [
+                      {
+                        component: {
+                          name: 'FooScreen',
+                          options: {
+                            // topBar: {
+                            //   visible: true,
+                            //   drawBehind: true,
+                            //   animate: false,
+                            //   transparent: true,
+                            //   translucent: true,
+                            //   elevation: 0,
+                            //   noBorder: true,
+                            //   backButton: {
+                            //     visible: true,
+                            //   },
+                            //   background: { color: 'transparent' },
+                            // },
+                            bottomTab: {
+                              fontSize: 12,
+                              text: 'Foo',
+                              icon: visaIconFontAwesome,
+                            },
+                          },
+                        },
                       },
-                    },
+                    ],
                   },
                 },
                 {
@@ -73,12 +97,6 @@ export const toMain = () =>
                   },
                 },
               ],
-            },
-          },
-          {
-            component: {
-              name: 'QuuxScreen',
-              id: 'QuuxScreenId',
             },
           },
         ],
