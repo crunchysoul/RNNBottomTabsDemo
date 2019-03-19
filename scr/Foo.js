@@ -11,18 +11,14 @@ import { Navigation } from 'react-native-navigation';
 import { styles } from './styles';
 import { initIcons } from './icons';
 import { toBottomLess } from './navigation';
+import {
+  MainStackTopBar,
+  TestStackTopBar,
+  NoTopBar,
+  InvisiableStackTopBar,
+} from './MainStackTopBar';
 
 export default class Foo extends React.Component {
-  static options(passProps) {
-    return {
-      topBar: {
-        drawBehind: true,
-        visible: false,
-        animate: false,
-      },
-    };
-  }
-
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
   }
@@ -36,24 +32,9 @@ export default class Foo extends React.Component {
           text: 'Pushed screen',
         },
         options: {
-          topBar: {
-            drawBehind: true,
-            visible: false,
-            animate: false,
-          },
-          // topBar: {
-          //   visible: true,
-          //   drawBehind: true,
-          //   animate: false,
-          //   transparent: true,
-          //   translucent: true,
-          //   elevation: 0,
-          //   noBorder: true,
-          //   backButton: {
-          //     visible: true,
-          //   },
-          //   background: { color: 'transparent' },
-          // },
+          // topBar: NoTopBar,
+          // topBar: InvisiableStackTopBar,
+          topBar: TestStackTopBar,
         },
       },
     });
@@ -68,19 +49,7 @@ export default class Foo extends React.Component {
           text: 'Pushed screen',
         },
         options: {
-          topBar: {
-            visible: true,
-            drawBehind: true,
-            animate: false,
-            transparent: true,
-            translucent: true,
-            elevation: 0,
-            noBorder: true,
-            backButton: {
-              visible: true,
-            },
-            background: { color: 'transparent' },
-          },
+          topBar: MainStackTopBar,
         },
       },
     });
@@ -90,7 +59,6 @@ export default class Foo extends React.Component {
     // wrapper for icons
     initIcons()
       .then(() => {
-        // Start app only if all icons are loaded
         Navigation.showModal({
           stack: {
             children: [
@@ -98,7 +66,6 @@ export default class Foo extends React.Component {
                 component: {
                   name: 'QuuxScreen',
                   options: {
-                    // modalPresentationStyle: 'formSheet',
                     topBar: {
                       rightButtons: [
                         {

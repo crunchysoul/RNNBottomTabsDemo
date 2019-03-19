@@ -1,6 +1,13 @@
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './screens';
 import { initIcons } from './icons';
+import {
+  MainStackTopBar,
+  TestStackTopBar,
+  TestFooStackTopBar,
+  NoTopBar,
+  InvisiableStackTopBar,
+} from './MainStackTopBar';
 
 export const startTabs = () => {
   registerScreens();
@@ -20,40 +27,31 @@ export const toMain = () =>
     root: {
       stack: {
         id: 'MainStackId',
+        options: {
+          topBar: MainStackTopBar,
+        },
         children: [
           {
-            topBar: {
-              visible: false,
-            },
             bottomTabs: {
               id: 'BottomTabsId',
               children: [
                 {
                   stack: {
                     id: 'FooStackId',
+                    options: {
+                      topBar: TestStackTopBar,
+                    },
                     children: [
                       {
                         component: {
                           name: 'FooScreen',
                           options: {
-                            // topBar: {
-                            //   visible: true,
-                            //   drawBehind: true,
-                            //   animate: false,
-                            //   transparent: true,
-                            //   translucent: true,
-                            //   elevation: 0,
-                            //   noBorder: true,
-                            //   backButton: {
-                            //     visible: true,
-                            //   },
-                            //   background: { color: 'transparent' },
-                            // },
                             bottomTab: {
                               fontSize: 12,
                               text: 'Foo',
                               icon: visaIconFontAwesome,
                             },
+                            topBar: TestFooStackTopBar,
                           },
                         },
                       },
@@ -61,39 +59,63 @@ export const toMain = () =>
                   },
                 },
                 {
-                  component: {
-                    name: 'BarScreen',
-                    options: {
-                      bottomTab: {
-                        text: 'Bar',
-                        fontSize: 12,
-                        icon: mastercardIconFontAwesome,
+                  stack: {
+                    id: 'BarStackId',
+                    children: [
+                      {
+                        component: {
+                          name: 'BarScreen',
+                          options: {
+                            bottomTab: {
+                              text: 'Bar',
+                              fontSize: 12,
+                              icon: mastercardIconFontAwesome,
+                            },
+                            // topBar: MainStackTopBar,
+                          },
+                        },
                       },
-                    },
+                    ],
                   },
                 },
                 {
-                  component: {
-                    name: 'BazScreen',
-                    options: {
-                      bottomTab: {
-                        text: 'Baz',
-                        fontSize: 12,
-                        icon: amexIconFontAwesome,
+                  stack: {
+                    id: 'BazStackId',
+                    children: [
+                      {
+                        component: {
+                          name: 'BazScreen',
+                          options: {
+                            bottomTab: {
+                              text: 'Baz',
+                              fontSize: 12,
+                              icon: amexIconFontAwesome,
+                            },
+                            // topBar: MainStackTopBar,
+                          },
+                        },
                       },
-                    },
+                    ],
                   },
                 },
                 {
-                  component: {
-                    name: 'QuxScreen',
-                    options: {
-                      bottomTab: {
-                        text: 'Qux',
-                        fontSize: 12,
-                        icon: paypalIconFontAwesome,
+                  stack: {
+                    id: 'QuxStackId',
+                    children: [
+                      {
+                        component: {
+                          name: 'QuxScreen',
+                          options: {
+                            bottomTab: {
+                              text: 'Qux',
+                              fontSize: 12,
+                              icon: paypalIconFontAwesome,
+                            },
+                            // topBar: MainStackTopBar,
+                          },
+                        },
                       },
-                    },
+                    ],
                   },
                 },
               ],
@@ -103,3 +125,54 @@ export const toMain = () =>
       },
     },
   });
+
+// const stackOf = (id, children) => ({
+//   stack: {
+//     id,
+//     children,
+//   },
+// });
+//
+// const componentOf = (name, options) => ({
+//   component: {
+//     name,
+//     options,
+//   },
+// });
+//
+// const Foo = componentOf('FooScreen', {
+//   bottomTab: {
+//     fontSize: 12,
+//     text: 'Foo',
+//     icon: visaIconFontAwesome,
+//   },
+// });
+// const Bar = componentOf('BarScreen', {
+//   bottomTab: {
+//     fontSize: 12,
+//     text: 'Bar',
+//     icon: mastercardIconFontAwesome,
+//   },
+// });
+// const Baz = componentOf('BazScreen', {
+//   bottomTab: {
+//     fontSize: 12,
+//     text: 'Baz',
+//     icon: amexIconFontAwesome,
+//   },
+// });
+// const Qux = componentOf('QuxScreen', {
+//   bottomTab: {
+//     fontSize: 12,
+//     text: 'Qux',
+//     icon: paypalIconFontAwesome,
+//   },
+// });
+//
+// const FooStack = stackOf('FooStackId', Foo);
+//
+// export const toMain = () => {
+//   Navigation.setRoot({
+//     root: stackOf('MainStackId', [Foo, Bar, Baz, Qux]),
+//   });
+// };
