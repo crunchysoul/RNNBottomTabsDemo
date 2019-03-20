@@ -2,6 +2,13 @@ const React = require('react');
 const { PureComponent } = require('react');
 const { View, Text, ScrollView, StyleSheet } = require('react-native');
 import { Navigation } from 'react-native-navigation';
+import {
+  MainStackTopBar,
+  TestStackTopBar,
+  TestFooStackTopBar,
+  HideBar,
+  InvisiableStackTopBar,
+} from './MainStackTopBar';
 // import { styles } from './styles';
 
 const colors = [
@@ -16,6 +23,19 @@ const colors = [
 ];
 
 class Corge extends PureComponent {
+  constructor(props) {
+    super(props);
+    Navigation.events().bindComponent(this); // <== Will be automatically unregistered when unmounted
+  }
+
+  navigationButtonPressed = ({ buttonId }) => {
+    switch (buttonId) {
+      case 'BtnCorgeTopBarLeft':
+        Navigation.pop(this.props.componentId);
+        break;
+    }
+  };
+
   render() {
     return (
       <View style={styles.root}>

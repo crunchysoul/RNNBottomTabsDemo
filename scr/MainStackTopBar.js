@@ -31,27 +31,60 @@ export const MainStackTopBar = {
 
 export const TestStackTopBar = {
   visible: true,
+  drawBehind: true,
+  animate: false,
+  transparent: false,
+  translucent: false,
+  elevation: 0,
+  noBorder: false,
+  background: { color: 'yellow' },
   title: {
-    text: 'YOUMUM',
+    text: 'YOU MUM',
+  },
+  backButton: {
+    visible: true,
   },
 };
 
 export const TestFooStackTopBar = {
   visible: true,
+  drawBehind: true,
+  animate: false,
+  transparent: false,
+  translucent: false,
+  elevation: 0,
+  noBorder: false,
+  background: { color: 'black' },
   title: {
-    text: 'YOLO',
+    text: 'YOLO Foo',
+  },
+  backButton: {
+    visible: true,
   },
 };
 
 export const TestBarStackTopBar = {
   visible: true,
   drawBehind: true,
+  animate: false,
+  transparent: false,
+  translucent: false,
+  elevation: 0,
+  noBorder: false,
+  background: { color: 'green' },
   title: {
-    text: 'YOLO',
+    text: 'YOLO Bar',
+  },
+  backButton: {
+    visible: true,
   },
 };
 
-export const NoTopBar = {
+export const ShowTopBar = {
+  visible: true,
+};
+
+export const HideTopBar = {
   visible: false,
 };
 

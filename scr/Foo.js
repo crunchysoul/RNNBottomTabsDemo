@@ -16,29 +16,69 @@ import {
   TestStackTopBar,
   TestFooStackTopBar,
   TestBarStackTopBar,
-  NoTopBar,
+  HideTopBar,
+  ShowTopBar,
   InvisiableStackTopBar,
 } from './MainStackTopBar';
 
 export default class Foo extends React.Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'My Screen',
+        },
+        drawBehind: true,
+        visible: false,
+        animate: true,
+        backButton: {
+          visible: true,
+        },
+      },
+    };
+  }
+
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
   }
 
   toPushView = () => {
-    Navigation.push(this.props.componentId, {
+    Navigation.push('FooStackId', {
       component: {
         // name: RouterConstants.SecondScreen,
-        name: 'QuuzScreen',
+        // name: 'QuuxScreen',
+        name: 'CorgeScreen',
         passProps: {
           text: 'Pushed screen',
         },
         options: {
-          // topBar: NoTopBar,
-          topBar: InvisiableStackTopBar,
-          // topBar: TestStackTopBar,
-          // topBar: TestBarStackTopBar,
+          topBar: {
+            visible: true,
+            drawBehind: true,
+          },
         },
+      },
+    });
+    Navigation.mergeOptions('MainStackId', {
+      // topBar: {
+      //   visible: true,
+      //   elevation: -1,
+      // },
+      topBar: {
+        title: {
+          text: 'YOUMUM',
+        },
+        visible: false,
+        drawBehind: true,
+        animate: false,
+        transparent: true,
+        translucent: true,
+        elevation: 0,
+        noBorder: true,
+        backButton: {
+          visible: true,
+        },
+        background: { color: 'transparent' },
       },
     });
   };
@@ -47,13 +87,13 @@ export default class Foo extends React.Component {
     Navigation.push('MainStackId', {
       component: {
         // name: RouterConstants.SecondScreen,
-        name: 'QuuxScreen',
+        name: 'CorgeScreen',
         passProps: {
           text: 'Pushed screen',
         },
-        // options: {
-        //   topBar: InvisiableStackTopBar,
-        // },
+        options: {
+          topBar: TestStackTopBar,
+        },
       },
     });
   };
@@ -70,6 +110,7 @@ export default class Foo extends React.Component {
                   name: 'QuuxScreen',
                   options: {
                     topBar: {
+                      visible: true,
                       rightButtons: [
                         {
                           id: 'BtnQuuxTopBarRight',
@@ -92,6 +133,35 @@ export default class Foo extends React.Component {
       });
   };
 
+  hideTopBar = () => {
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        visible: false,
+      },
+    });
+  };
+
+  showTopBar = () => {
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        visible: true,
+      },
+    });
+  };
+
+  push = () => Navigation.push(this, Screens.Pushed);
+
+  hideTopBarInDefaultOptions = () => {
+    Navigation.setDefaultOptions({
+      topBar: {
+        visible: false,
+        title: {
+          text: 'Default Title',
+        },
+      },
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -101,6 +171,21 @@ export default class Foo extends React.Component {
           {this.constructor.name}
           .js
         </Text>
+
+        <TouchableOpacity
+          onPress={this.hideTopBarInDefaultOptions}
+          disabled={false}
+        >
+          <Text style={styles.button}>Hide topBar in default</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.hideTopBar} disabled={false}>
+          <Text style={styles.button}>Hide Top Bar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.showTopBar} disabled={false}>
+          <Text style={styles.button}>Show Top Bar</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={this.toModalView} disabled={false}>
           <Text style={styles.button}>Modal</Text>

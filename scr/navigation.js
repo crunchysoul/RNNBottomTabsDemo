@@ -5,7 +5,9 @@ import {
   MainStackTopBar,
   TestStackTopBar,
   TestFooStackTopBar,
-  NoTopBar,
+  TestBarStackTopBar,
+  HideTopBar,
+  ShowTopBar,
   InvisiableStackTopBar,
 } from './MainStackTopBar';
 
@@ -22,7 +24,10 @@ export const startTabs = () => {
     });
 };
 
-export const toMain = () =>
+export const toMain = () => {
+  Navigation.setDefaultOptions({
+    topBar: HideTopBar,
+  });
   Navigation.setRoot({
     root: {
       // NOTE XXX XXX XXX XXX XXX XXX
@@ -31,12 +36,15 @@ export const toMain = () =>
       stack: {
         id: 'MainStackId',
         // options: {
-        //   topBar: NoTopBar,
+        //   topBar: HideTopBar,
         // },
         children: [
           {
             bottomTabs: {
               id: 'BottomTabsId',
+              // options: {
+              //   topBar: TestFooStackTopBar,
+              // },
               children: [
                 {
                   // NOTE XXX XXX XXX XXX XXX XXX
@@ -45,7 +53,7 @@ export const toMain = () =>
                   stack: {
                     id: 'FooStackId',
                     // options: {
-                    //   topBar: TestStackTopBar,
+                    //   topBar: TestBarStackTopBar,
                     // },
                     children: [
                       {
@@ -54,12 +62,13 @@ export const toMain = () =>
                           options: {
                             bottomTab: {
                               fontSize: 12,
-                              text: 'Foo',
+                              // text: 'Foo',
                               icon: visaIconFontAwesome,
                             },
                             // NOTE XXX XXX XXX XXX XXX XXX
                             // Component Level TopBar:
-                            // topBar: NoTopBar,
+                            // topBar: HideTopBar,
+                            topBar: InvisiableStackTopBar,
                           },
                         },
                       },
@@ -75,12 +84,12 @@ export const toMain = () =>
                           name: 'BarScreen',
                           options: {
                             bottomTab: {
-                              text: 'Bar',
+                              // text: 'Bar',
                               fontSize: 12,
                               icon: mastercardIconFontAwesome,
                             },
                             // topBar: MainStackTopBar,
-                            topBar: TestFooStackTopBar,
+                            // topBar: TestFooStackTopBar,
                           },
                         },
                       },
@@ -96,11 +105,11 @@ export const toMain = () =>
                           name: 'BazScreen',
                           options: {
                             bottomTab: {
-                              text: 'Baz',
+                              // text: 'Baz',
                               fontSize: 12,
                               icon: amexIconFontAwesome,
                             },
-                            topBar: TestFooStackTopBar,
+                            // topBar: TestFooStackTopBar,
                             // topBar: MainStackTopBar,
                           },
                         },
@@ -117,11 +126,11 @@ export const toMain = () =>
                           name: 'CorgeScreen',
                           options: {
                             bottomTab: {
-                              text: 'Qux',
+                              // text: 'Corge',
                               fontSize: 12,
                               icon: paypalIconFontAwesome,
                             },
-                            topBar: TestFooStackTopBar,
+                            // topBar: TestFooStackTopBar,
                             // topBar: MainStackTopBar,
                           },
                         },
@@ -136,6 +145,134 @@ export const toMain = () =>
       },
     },
   });
+};
+
+// export const toMain = () => {
+//   Navigation.setDefaultOptions({
+//     topBar: {
+//       visible: false,
+//       title: {
+//         text: 'Default Title',
+//       },
+//     },
+//   });
+//   Navigation.setRoot({
+//     root: {
+//       // NOTE XXX XXX XXX XXX XXX XXX
+//       // Stack Level 1, global level:
+//       // { bottomTabs || QuuxScreen }
+//       stack: {
+//         id: 'MainStackId',
+//         options: {
+//           topBar: HideTopBar,
+//         },
+//         children: [
+//           {
+//             bottomTabs: {
+//               id: 'BottomTabsId',
+//               options: {
+//                 height: 75,
+//               },
+//               children: [
+//                 {
+//                   // NOTE XXX XXX XXX XXX XXX XXX
+//                   // Stack Level 2, local level:
+//                   // { FooScreen || ... }
+//                   stack: {
+//                     id: 'FooStackId',
+//                     // options: {
+//                     //   topBar: TestStackTopBar,
+//                     // },
+//                     children: [
+//                       {
+//                         component: {
+//                           name: 'FooScreen',
+//                           options: {
+//                             bottomTab: {
+//                               fontSize: 12,
+//                               // text: 'Foo',
+//                               icon: visaIconFontAwesome,
+//                             },
+//                             // NOTE XXX XXX XXX XXX XXX XXX
+//                             // Component Level TopBar:
+//                             topBar: HideTopBar,
+//                           },
+//                         },
+//                       },
+//                     ],
+//                   },
+//                 },
+//                 {
+//                   stack: {
+//                     id: 'BarStackId',
+//                     children: [
+//                       {
+//                         component: {
+//                           name: 'BarScreen',
+//                           options: {
+//                             bottomTab: {
+//                               // text: 'Bar',
+//                               fontSize: 12,
+//                               icon: mastercardIconFontAwesome,
+//                             },
+//                             // topBar: MainStackTopBar,
+//                             // topBar: TestFooStackTopBar,
+//                           },
+//                         },
+//                       },
+//                     ],
+//                   },
+//                 },
+//                 {
+//                   stack: {
+//                     id: 'BazStackId',
+//                     children: [
+//                       {
+//                         component: {
+//                           name: 'BazScreen',
+//                           options: {
+//                             bottomTab: {
+//                               // text: 'Baz',
+//                               fontSize: 12,
+//                               icon: amexIconFontAwesome,
+//                             },
+//                             // topBar: TestFooStackTopBar,
+//                             // topBar: MainStackTopBar,
+//                           },
+//                         },
+//                       },
+//                     ],
+//                   },
+//                 },
+//                 {
+//                   stack: {
+//                     id: 'CorgeStackId',
+//                     children: [
+//                       {
+//                         component: {
+//                           name: 'CorgeScreen',
+//                           options: {
+//                             bottomTab: {
+//                               // text: 'Corge',
+//                               fontSize: 12,
+//                               icon: paypalIconFontAwesome,
+//                             },
+//                             // topBar: TestFooStackTopBar,
+//                             // topBar: MainStackTopBar,
+//                           },
+//                         },
+//                       },
+//                     ],
+//                   },
+//                 },
+//               ],
+//             },
+//           },
+//         ],
+//       },
+//     },
+//   });
+// };
 
 // const stackOf = (id, children) => ({
 //   stack: {
