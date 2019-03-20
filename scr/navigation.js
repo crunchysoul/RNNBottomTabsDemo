@@ -66,6 +66,7 @@ export const toMain = () => {
                             // NOTE XXX XXX XXX XXX XXX XXX
                             // Component Level TopBar:
                             // topBar: HideTopBar,
+                            // topBar: InvisiableStackTopBar,
                             topBar: InvisiableStackTopBar,
                           },
                         },

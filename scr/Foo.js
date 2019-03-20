@@ -1,3 +1,4 @@
+const _ = require('lodash');
 import React from 'react';
 import {
   StyleSheet,
@@ -6,9 +7,10 @@ import {
   Button,
   TouchableOpacity,
   Platform,
+  ScrollView,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import { styles } from './styles';
+// import { styles } from './styles';
 import { initIcons } from './icons';
 import { toBottomLess } from './navigation';
 import {
@@ -20,6 +22,17 @@ import {
   ShowTopBar,
   InvisiableStackTopBar,
 } from './MainStackTopBar';
+
+const colors = [
+  '#3182C8',
+  '#00AAAF',
+  '#00A65F',
+  '#E2902B',
+  '#D9644A',
+  '#CF262F',
+  '#8B1079',
+  '#48217B',
+];
 
 export default class Foo extends React.Component {
   componentDidMount() {
@@ -38,7 +51,8 @@ export default class Foo extends React.Component {
         transparent: true,
         translucent: true,
         elevation: 0,
-        noBorder: true,
+        // TODO: how to get nav border
+        noBorder: false,
         // NOTE:
         // Need to be transparent (or same color?)
         background: { color: 'transparent' },
@@ -167,50 +181,125 @@ export default class Foo extends React.Component {
     });
   };
 
+  handlerList = [
+    this.hideTopBar,
+    this.showTopBar,
+    this.showModal,
+    this.toPushView,
+    this.toPushViewBottomLess,
+  ];
+
+  colorHandlers = _.zip(colors, this.handlerList);
+
+  renderRow = ([color, fn]) => (
+    <TouchableOpacity onPress={fn} disabled={false}>
+      <Text key={color} style={[styles.row, { backgroundColor: color }]}>
+        {color}
+      </Text>
+    </TouchableOpacity>
+  );
+
   render() {
+    console.log('--------------', this.colorHandlers);
     return (
-      <View style={styles.container}>
-        <Text style={styles.h1}>
-          {this.constructor.name}
-          ::src/screens/
-          {this.constructor.name}
-          .js
-        </Text>
-
-        <TouchableOpacity
-          onPress={this.hideTopBarInDefaultOptions}
-          disabled={false}
+      <View style={styles.root}>
+        <View
+          style={{
+            alignSelf: 'center',
+            flexDirection: 'row',
+          }}
         >
-          <Text style={styles.button}>Hide topBar in default</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.hideTopBar} disabled={false}>
-          <Text style={styles.button}>Hide Top Bar</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.showTopBar} disabled={false}>
-          <Text style={styles.button}>Show Top Bar</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.toModalView} disabled={false}>
-          <Text style={styles.button}>Modal</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.toPushView}>
-          <Text style={styles.button}>Push</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.toPushViewBottomLess}>
-          <Text style={styles.button}>Push Bottom Less</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={this.modalViewNearyByScreen}
-          disabled={false}
-        >
-          <Text style={styles.button}>SideMenu</Text>
-        </TouchableOpacity>
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.content}
+          >
+            {/* {colors.map(this.renderRow)} */}
+            {this.colorHandlers.map(this.renderRow)}
+          </ScrollView>
+        </View>
       </View>
     );
   }
+
+  // render() {
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.h1}>
+  //         {this.constructor.name}
+  //         ::src/screens/
+  //         {this.constructor.name}
+  //         .js
+  //       </Text>
+  //
+  //       <TouchableOpacity
+  //         onPress={this.hideTopBarInDefaultOptions}
+  //         disabled={false}
+  //       >
+  //         <Text style={styles.button}>Hide topBar in default</Text>
+  //       </TouchableOpacity>
+  //
+  //       <TouchableOpacity onPress={this.hideTopBar} disabled={false}>
+  //         <Text style={styles.button}>Hide Top Bar</Text>
+  //       </TouchableOpacity>
+  //
+  //       <TouchableOpacity onPress={this.showTopBar} disabled={false}>
+  //         <Text style={styles.button}>Show Top Bar</Text>
+  //       </TouchableOpacity>
+  //
+  //       <TouchableOpacity onPress={this.toModalView} disabled={false}>
+  //         <Text style={styles.button}>Modal</Text>
+  //       </TouchableOpacity>
+  //
+  //       <TouchableOpacity onPress={this.toPushView}>
+  //         <Text style={styles.button}>Push</Text>
+  //       </TouchableOpacity>
+  //
+  //       <TouchableOpacity onPress={this.toPushViewBottomLess}>
+  //         <Text style={styles.button}>Push Bottom Less</Text>
+  //       </TouchableOpacity>
+  //
+  //       <TouchableOpacity
+  //         onPress={this.modalViewNearyByScreen}
+  //         disabled={false}
+  //       >
+  //         <Text style={styles.button}>SideMenu</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
 }
+
+const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: 'blue',
+  },
+  root: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
+  row: {
+    height: 80,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: 'white',
+  },
+  content: {
+    backgroundColor: 'blue',
+  },
+  h1: {
+    fontSize: 24,
+    textAlign: 'center',
+    margin: 10,
+  },
+  h2: {
+    fontSize: 12,
+    textAlign: 'center',
+    margin: 10,
+  },
+  footer: {
+    fontSize: 10,
+    color: '#888',
+    marginTop: 10,
+  },
+});
