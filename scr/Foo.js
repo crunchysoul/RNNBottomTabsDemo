@@ -35,9 +35,9 @@ export default class Foo extends React.Component {
         },
         options: {
           // topBar: NoTopBar,
-          // topBar: InvisiableStackTopBar,
+          topBar: InvisiableStackTopBar,
           // topBar: TestStackTopBar,
-          topBar: TestBarStackTopBar,
+          // topBar: TestBarStackTopBar,
         },
       },
     });
@@ -51,9 +51,9 @@ export default class Foo extends React.Component {
         passProps: {
           text: 'Pushed screen',
         },
-        options: {
-          topBar: InvisiableStackTopBar,
-        },
+        // options: {
+        //   topBar: InvisiableStackTopBar,
+        // },
       },
     });
   };

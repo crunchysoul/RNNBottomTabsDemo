@@ -30,9 +30,9 @@ export const toMain = () =>
       // { bottomTabs || QuuxScreen }
       stack: {
         id: 'MainStackId',
-        options: {
-          topBar: NoTopBar,
-        },
+        // options: {
+        //   topBar: NoTopBar,
+        // },
         children: [
           {
             bottomTabs: {
@@ -44,9 +44,9 @@ export const toMain = () =>
                   // { FooScreen || ... }
                   stack: {
                     id: 'FooStackId',
-                    options: {
-                      topBar: NoTopBar,
-                    },
+                    // options: {
+                    //   topBar: TestStackTopBar,
+                    // },
                     children: [
                       {
                         component: {
@@ -59,7 +59,7 @@ export const toMain = () =>
                             },
                             // NOTE XXX XXX XXX XXX XXX XXX
                             // Component Level TopBar:
-                            topBar: NoTopBar,
+                            // topBar: NoTopBar,
                           },
                         },
                       },
@@ -110,11 +110,11 @@ export const toMain = () =>
                 },
                 {
                   stack: {
-                    id: 'QuxStackId',
+                    id: 'CorgeStackId',
                     children: [
                       {
                         component: {
-                          name: 'QuxScreen',
+                          name: 'CorgeScreen',
                           options: {
                             bottomTab: {
                               text: 'Qux',
