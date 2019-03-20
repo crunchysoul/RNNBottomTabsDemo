@@ -22,27 +22,36 @@ import {
 } from './MainStackTopBar';
 
 export default class Foo extends React.Component {
-  static options(passProps) {
-    return {
-      topBar: {
-        title: {
-          text: 'My Screen',
-        },
-        drawBehind: true,
-        visible: false,
-        animate: true,
-        backButton: {
-          visible: true,
-        },
-      },
-    };
-  }
-
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
+
+    // NOTE:
+    // Need to be here, otherwise WILL NOT WORK if options are set in static
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: 'YOU MUM',
+        },
+        visible: true,
+        drawBehind: true,
+        animate: true,
+        transparent: true,
+        translucent: true,
+        elevation: 0,
+        noBorder: true,
+        // NOTE:
+        // Need to be transparent (or same color?)
+        background: { color: 'transparent' },
+      },
+    });
   }
 
   toPushView = () => {
+    // NOTE:
+    // Sequence matters below:
+    // 1. push on inner stack
+    // 2. merge outer stack with visible to false
+    // WILL NOT WORKS if order is wrong
     Navigation.push('FooStackId', {
       component: {
         // name: RouterConstants.SecondScreen,
@@ -60,10 +69,6 @@ export default class Foo extends React.Component {
       },
     });
     Navigation.mergeOptions('MainStackId', {
-      // topBar: {
-      //   visible: true,
-      //   elevation: -1,
-      // },
       topBar: {
         title: {
           text: 'YOUMUM',

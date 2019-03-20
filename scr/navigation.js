@@ -25,9 +25,13 @@ export const startTabs = () => {
 };
 
 export const toMain = () => {
+  // NOTE:
+  // Set global topBar default to hide
+  // adjust if needed to show in loweset component level as possible
   Navigation.setDefaultOptions({
     topBar: HideTopBar,
   });
+
   Navigation.setRoot({
     root: {
       // NOTE XXX XXX XXX XXX XXX XXX
@@ -42,9 +46,6 @@ export const toMain = () => {
           {
             bottomTabs: {
               id: 'BottomTabsId',
-              // options: {
-              //   topBar: TestFooStackTopBar,
-              // },
               children: [
                 {
                   // NOTE XXX XXX XXX XXX XXX XXX
@@ -52,9 +53,6 @@ export const toMain = () => {
                   // { FooScreen || ... }
                   stack: {
                     id: 'FooStackId',
-                    // options: {
-                    //   topBar: TestBarStackTopBar,
-                    // },
                     children: [
                       {
                         component: {
