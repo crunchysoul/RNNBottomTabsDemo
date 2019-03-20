@@ -41,6 +41,14 @@ export default class Foo extends React.Component {
     // NOTE:
     // Need to be here, otherwise WILL NOT WORK if options are set in static
     Navigation.mergeOptions(this.props.componentId, {
+      // animations: {
+      //   push: {
+      //     waitForRender: true,
+      //   },
+      //   showModal: {
+      //     waitForRender: true,
+      //   },
+      // },
       topBar: {
         title: {
           text: 'YOU MUM',
@@ -56,6 +64,51 @@ export default class Foo extends React.Component {
         // NOTE:
         // Need to be transparent (or same color?)
         background: { color: 'transparent' },
+      },
+    });
+    alert('componentDidMount');
+  }
+
+  componentDidAppear() {
+    // NOTE:
+    // Need to be here, otherwise WILL NOT WORK if options are set in static
+    Navigation.mergeOptions(this.props.componentId, {
+      animations: {
+        push: {
+          waitForRender: true,
+        },
+        showModal: {
+          waitForRender: true,
+        },
+      },
+      topBar: {
+        title: {
+          text: 'YOU MUM',
+        },
+        visible: true,
+        drawBehind: true,
+        animate: true,
+        transparent: true,
+        translucent: true,
+        elevation: 0,
+        // TODO: how to get nav border
+        noBorder: false,
+        // NOTE:
+        // Need to be transparent (or same color?)
+        background: { color: 'transparent' },
+      },
+    });
+    Navigation.mergeOptions('MainStackId', {
+      animations: {
+        push: {
+          waitForRender: true,
+        },
+        showModal: {
+          waitForRender: true,
+        },
+      },
+      topBar: {
+        visible: false,
       },
     });
   }
@@ -184,16 +237,27 @@ export default class Foo extends React.Component {
   handlerList = [
     this.hideTopBar,
     this.showTopBar,
-    this.showModal,
+    this.toModalView,
     this.toPushView,
     this.toPushViewBottomLess,
   ];
 
-  colorHandlers = _.zip(colors, this.handlerList);
+  // TODO: do something this is dumb
+  nameList = [
+    'hideTopBar',
+    'showTopBar',
+    'toModalView',
+    'toPushView',
+    'toPushViewBottomLess',
+  ];
 
-  renderRow = ([color, fn]) => (
+  colorHandlers = _.zip(colors, this.handlerList, this.nameList);
+
+  renderRow = ([color, fn, name]) => (
     <TouchableOpacity onPress={fn} disabled={false}>
       <Text key={color} style={[styles.row, { backgroundColor: color }]}>
+        {name}
+        {'\n'}
         {color}
       </Text>
     </TouchableOpacity>
@@ -283,6 +347,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     color: 'white',
+    fontSize: 24,
   },
   content: {
     backgroundColor: 'blue',
