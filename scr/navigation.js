@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { registerScreens } from './screens';
+import { registerScreens, RNN } from './screens';
 import { initIcons } from './icons';
 import {
   MainStackTopBar,
@@ -28,9 +28,9 @@ export const toMain = () => {
   // NOTE:
   // Set global topBar default to hide
   // adjust if needed to show in loweset component level as possible
-  Navigation.setDefaultOptions({
-    topBar: HideTopBar,
-  });
+  // Navigation.setDefaultOptions({
+  //   topBar: HideTopBar,
+  // });
 
   Navigation.setRoot({
     root: {
@@ -38,25 +38,22 @@ export const toMain = () => {
       // Stack Level 1, global level:
       // { bottomTabs || QuuxScreen }
       stack: {
-        id: 'MainStackId',
-        // options: {
-        //   topBar: HideTopBar,
-        // },
+        id: RNN.stack.Main,
         children: [
           {
             bottomTabs: {
-              id: 'BottomTabsId',
+              id: RNN.stack.BottomTabs,
               children: [
                 {
                   // NOTE XXX XXX XXX XXX XXX XXX
                   // Stack Level 2, local level:
                   // { FooScreen || ... }
                   stack: {
-                    id: 'FooStackId',
+                    id: RNN.stack.Foo,
                     children: [
                       {
                         component: {
-                          name: 'FooScreen',
+                          name: RNN.screen.Foo,
                           options: {
                             bottomTab: {
                               fontSize: 12,
@@ -67,7 +64,7 @@ export const toMain = () => {
                             // Component Level TopBar:
                             // topBar: HideTopBar,
                             // topBar: InvisiableStackTopBar,
-                            topBar: InvisiableStackTopBar,
+                            // topBar: InvisiableStackTopBar,
                           },
                         },
                       },
@@ -76,11 +73,11 @@ export const toMain = () => {
                 },
                 {
                   stack: {
-                    id: 'BarStackId',
+                    id: RNN.stack.Bar,
                     children: [
                       {
                         component: {
-                          name: 'BarScreen',
+                          name: RNN.screen.Bar,
                           options: {
                             bottomTab: {
                               // text: 'Bar',
@@ -97,11 +94,11 @@ export const toMain = () => {
                 },
                 {
                   stack: {
-                    id: 'BazStackId',
+                    id: RNN.stack.Baz,
                     children: [
                       {
                         component: {
-                          name: 'BazScreen',
+                          name: RNN.screen.Baz,
                           options: {
                             bottomTab: {
                               // text: 'Baz',
@@ -118,11 +115,11 @@ export const toMain = () => {
                 },
                 {
                   stack: {
-                    id: 'CorgeStackId',
+                    id: RNN.stack.Corge,
                     children: [
                       {
                         component: {
-                          name: 'CorgeScreen',
+                          name: RNN.screen.Corge,
                           options: {
                             bottomTab: {
                               // text: 'Corge',

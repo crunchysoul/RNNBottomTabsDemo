@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import { toMain, startTabs } from './navigation';
+import { RNN } from './screens.js';
 import { styles } from './styles';
 
-export default class Initialising extends React.Component {
+export default class Initial extends React.Component {
   componentDidMount() {
     startTabs();
-    // toMain();
   }
 
   render() {

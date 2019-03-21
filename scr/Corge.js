@@ -2,6 +2,7 @@ const React = require('react');
 const { PureComponent } = require('react');
 const { View, Text, ScrollView, StyleSheet } = require('react-native');
 import { Navigation } from 'react-native-navigation';
+import { RNN } from './screens';
 import {
   MainStackTopBar,
   TestStackTopBar,
@@ -23,6 +24,17 @@ const colors = [
 ];
 
 class Corge extends PureComponent {
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'OUTER TOPBAR',
+        },
+        drawBehind: true,
+        visible: true,
+      },
+    };
+  }
   constructor(props) {
     super(props);
     Navigation.events().bindComponent(this); // <== Will be automatically unregistered when unmounted
@@ -35,6 +47,12 @@ class Corge extends PureComponent {
         break;
     }
   };
+
+  componentDidAppear() {
+    Navigation.mergeOptions(RNN.stack.Main, {
+      topBar: TestStackTopBar,
+    });
+  }
 
   render() {
     return (
