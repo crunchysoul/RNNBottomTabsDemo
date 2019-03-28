@@ -39,9 +39,11 @@ export const toMain = () => {
       // { bottomTabs || QuuxScreen }
       stack: {
         id: 'MainStackId',
-        // options: {
-        //   topBar: HideTopBar,
-        // },
+        options: {
+          topBar: {
+            visible: false,
+          },
+        },
         children: [
           {
             bottomTabs: {
@@ -53,10 +55,16 @@ export const toMain = () => {
                   // { FooScreen || ... }
                   stack: {
                     id: 'FooStackId',
+                    options: {
+                      topBar: {
+                        visible: false,
+                      },
+                    },
                     children: [
                       {
                         component: {
                           name: 'FooScreen',
+                          id: 'FooScreenId',
                           options: {
                             bottomTab: {
                               fontSize: 12,
@@ -66,7 +74,10 @@ export const toMain = () => {
                             // NOTE XXX XXX XXX XXX XXX XXX
                             // Component Level TopBar:
                             // topBar: HideTopBar,
-                            topBar: InvisiableStackTopBar,
+                            // topBar: InvisiableStackTopBar,
+                            topBar: {
+                              visible: false,
+                            },
                           },
                         },
                       },
@@ -76,6 +87,11 @@ export const toMain = () => {
                 {
                   stack: {
                     id: 'BarStackId',
+                    options: {
+                      topBar: {
+                        visible: false,
+                      },
+                    },
                     children: [
                       {
                         component: {
@@ -97,6 +113,11 @@ export const toMain = () => {
                 {
                   stack: {
                     id: 'BazStackId',
+                    options: {
+                      topBar: {
+                        visible: false,
+                      },
+                    },
                     children: [
                       {
                         component: {

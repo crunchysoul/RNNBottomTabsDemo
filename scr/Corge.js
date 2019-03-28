@@ -23,6 +23,18 @@ const colors = [
 ];
 
 class Corge extends PureComponent {
+  // static options(passProps) {
+  //   return {
+  //     topBar: {
+  //       title: {
+  //         text: 'My Screen',
+  //       },
+  //       // drawBehind: true,
+  //       visible: true,
+  //       animate: false,
+  //     },
+  //   };
+  // }
   constructor(props) {
     super(props);
     Navigation.events().bindComponent(this); // <== Will be automatically unregistered when unmounted

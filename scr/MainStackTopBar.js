@@ -39,7 +39,7 @@ export const TestStackTopBar = {
   noBorder: false,
   background: { color: 'yellow' },
   title: {
-    text: 'YOU MUM',
+    text: 'OUT NAVBAR',
   },
   backButton: {
     visible: true,

@@ -25,23 +25,44 @@ export default class Foo extends React.Component {
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
 
-    // NOTE:
-    // Need to be here, otherwise WILL NOT WORK if options are set in static
-    Navigation.mergeOptions(this.props.componentId, {
+    // // NOTE:
+    // // Need to be here, otherwise WILL NOT WORK if options are set in static
+    // Navigation.mergeOptions(this.props.componentId, {
+    //   topBar: {
+    //     title: {
+    //       text: 'INNER NAVBAR',
+    //     },
+    //     visible: false,
+    //     // drawBehind: true,
+    //     animate: false,
+    //     // transparent: true,
+    //     // translucent: true,
+    //     // elevation: 0,
+    //     // noBorder: true,
+    //     // NOTE:
+    //     // Need to be transparent (or same color?)
+    //     // background: { color: 'transparent' },
+    //     // background: { color: 'yellow' },
+    //   },
+    // });
+  }
+
+  // DOING
+  componentDidAppear() {
+    Navigation.mergeOptions('FooScreenId', {
       topBar: {
-        title: {
-          text: 'YOU MUM',
-        },
         visible: true,
-        drawBehind: true,
-        animate: true,
-        transparent: true,
-        translucent: true,
-        elevation: 0,
-        noBorder: true,
-        // NOTE:
-        // Need to be transparent (or same color?)
-        background: { color: 'transparent' },
+        animate: false,
+        title: {
+          text: 'Foo2',
+        },
+      },
+    });
+
+    Navigation.mergeOptions('MainStackId', {
+      topBar: {
+        visible: false,
+        animate: false,
       },
     });
   }
@@ -52,7 +73,62 @@ export default class Foo extends React.Component {
     // 1. push on inner stack
     // 2. merge outer stack with visible to false
     // WILL NOT WORKS if order is wrong
-    Navigation.push('FooStackId', {
+    // Navigation.push('FooScreenId', {
+    //   component: {
+    //     // name: RouterConstants.SecondScreen,
+    //     // name: 'QuuxScreen',
+    //     name: 'CorgeScreen',
+    //     passProps: {
+    //       text: 'Pushed screen',
+    //     },
+    //     options: {
+    //       topBar: {
+    //         visible: true,
+    //         drawBehind: true,
+    //         title: {
+    //           text: 'INNER NAVBAR 2',
+    //         },
+    //       },
+    //     },
+    //   },
+    // });
+
+    Navigation.mergeOptions('FooScreenId', {
+      topBar: {
+        visible: false,
+        animate: false,
+        title: {
+          text: 'Foo2',
+        },
+      },
+    });
+    Navigation.mergeOptions('MainStackId', {
+      topBar: {
+        // title: {
+        //   text: 'INNER NAVBAR',
+        // },
+        visible: false,
+        // drawBehind: true,
+        animate: false,
+        // transparent: true,
+        // translucent: true,
+        // elevation: 0,
+        // noBorder: true,
+        // backButton: {
+        //   visible: true,
+        // },
+        // background: { color: 'transparent' },
+      },
+    });
+    // Navigation.mergeOptions(this.props.componentId, {
+    // Navigation.mergeOptions('FooScreenId', {
+    //   topBar: {
+    //     visible: true,
+    //     animate: false,
+    //   },
+    // });
+    // Navigation.push(this.props.componentId, {
+    Navigation.push('FooScreenId', {
       component: {
         // name: RouterConstants.SecondScreen,
         // name: 'QuuxScreen',
@@ -63,27 +139,12 @@ export default class Foo extends React.Component {
         options: {
           topBar: {
             visible: true,
-            drawBehind: true,
+            // drawBehind: true,
+            title: {
+              text: 'INNER NAVBAR 2',
+            },
           },
         },
-      },
-    });
-    Navigation.mergeOptions('MainStackId', {
-      topBar: {
-        title: {
-          text: 'YOUMUM',
-        },
-        visible: false,
-        drawBehind: true,
-        animate: false,
-        transparent: true,
-        translucent: true,
-        elevation: 0,
-        noBorder: true,
-        backButton: {
-          visible: true,
-        },
-        background: { color: 'transparent' },
       },
     });
   };
