@@ -30,12 +30,20 @@ export default class Foo extends React.Component {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'CorgeScreen',
-        passProps: {
-          text: 'Pushed screen',
-        },
         options: {
+          largeTitle: {
+            visible: true,
+            fontSize: 30,
+            color: 'red',
+            fontFamily: 'Helvetica',
+          },
           topBar: {
-            drawBehind: true,
+            drawBehind: false,
+            animate: false,
+            background: {
+              color: 'white',
+              blur: true,
+            },
             title: {
               text: 'INNER TOPBAR',
             },
@@ -49,43 +57,59 @@ export default class Foo extends React.Component {
     Navigation.push('MainStackId', {
       component: {
         name: 'CorgeScreen',
-        passProps: {
-          text: 'Pushed screen',
-        },
         options: {
-          topBar: TestStackTopBar,
+          largeTitle: {
+            visible: true,
+            fontSize: 30,
+            color: 'red',
+            fontFamily: 'Helvetica',
+          },
+          topBar: {
+            visible: true,
+            drawBehind: false,
+            animate: false,
+            transparent: false,
+            translucent: false,
+            elevation: 0,
+            noBorder: false,
+            background: {
+              color: 'white',
+              blur: true,
+            },
+            title: {
+              text: 'OVER TOPBAR',
+            },
+            backButton: {
+              visible: true,
+              title: 'FooScreen',
+            },
+          },
         },
       },
     });
-  };
-
-  hideTopBar = () => {
-    Navigation.mergeOptions(this.props.componentId, {
-      topBar: {
-        visible: false,
-      },
-    });
-  };
-
-  showTopBar = () => {
-    Navigation.mergeOptions(this.props.componentId, {
-      topBar: {
-        visible: true,
-      },
-    });
-  };
-
-  push = () => Navigation.push(this, Screens.Pushed);
-
-  hideTopBarInDefaultOptions = () => {
-    Navigation.setDefaultOptions({
-      topBar: {
-        visible: false,
-        title: {
-          text: 'Default Title',
-        },
-      },
-    });
+    // Navigation.mergeOptions(this.props.componentId, {
+    //   component: {
+    //     name: 'CorgeScreen',
+    //     options: {
+    //       topBar: {
+    //         visible: true,
+    //         drawBehind: false,
+    //         animate: false,
+    //         background: {
+    //           color: 'white',
+    //           blur: true,
+    //         },
+    //         title: {
+    //           text: 'OVER TOPBAR',
+    //         },
+    //         backButton: {
+    //           visible: true,
+    //           text: 'test',
+    //         },
+    //       },
+    //     },
+    //   },
+    // });
   };
 
   render() {
@@ -98,25 +122,6 @@ export default class Foo extends React.Component {
           .js
         </Text>
 
-        {/* <TouchableOpacity */}
-        {/*   onPress={this.hideTopBarInDefaultOptions} */}
-        {/*   disabled={true} */}
-        {/* > */}
-        {/*   <Text style={styles.button}>Hide topBar in default</Text> */}
-        {/* </TouchableOpacity> */}
-        {/*  */}
-        {/* <TouchableOpacity onPress={this.hideTopBar} disabled={true}> */}
-        {/*   <Text style={styles.button}>Hide Top Bar</Text> */}
-        {/* </TouchableOpacity> */}
-        {/*  */}
-        {/* <TouchableOpacity onPress={this.showTopBar} disabled={true}> */}
-        {/*   <Text style={styles.button}>Show Top Bar</Text> */}
-        {/* </TouchableOpacity> */}
-        {/*  */}
-        {/* <TouchableOpacity onPress={this.toModalView} disabled={false}> */}
-        {/*   <Text style={styles.button}>Modal</Text> */}
-        {/* </TouchableOpacity> */}
-
         <TouchableOpacity onPress={this.toPushView}>
           <Text style={styles.button}>Push Under</Text>
         </TouchableOpacity>
@@ -124,10 +129,6 @@ export default class Foo extends React.Component {
         <TouchableOpacity onPress={this.toPushViewBottomLess}>
           <Text style={styles.button}>Push Over</Text>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity onPress={this.modalViewNearyByScreen} disabled={true}> */}
-        {/*   <Text style={styles.button}>SideMenu</Text> */}
-        {/* </TouchableOpacity> */}
       </View>
     );
   }
