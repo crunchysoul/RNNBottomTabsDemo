@@ -67,7 +67,7 @@ class Corge extends PureComponent {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
   },
   root: {
     flex: 1,

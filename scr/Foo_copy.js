@@ -24,23 +24,66 @@ import {
 export default class Foo extends React.Component {
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
+
+    // NOTE:
+    // Need to be here, otherwise WILL NOT WORK if options are set in static
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: 'YOU MUM',
+        },
+        visible: true,
+        drawBehind: true,
+        animate: true,
+        transparent: true,
+        translucent: true,
+        elevation: 0,
+        noBorder: true,
+        // NOTE:
+        // Need to be transparent (or same color?)
+        background: { color: 'transparent' },
+      },
+    });
   }
 
   toPushView = () => {
-    Navigation.push(this.props.componentId, {
+    // NOTE:
+    // Sequence matters below:
+    // 1. push on inner stack
+    // 2. merge outer stack with visible to false
+    // WILL NOT WORKS if order is wrong
+    Navigation.push('FooStackId', {
       component: {
+        // name: RouterConstants.SecondScreen,
+        // name: 'QuuxScreen',
         name: 'CorgeScreen',
         passProps: {
           text: 'Pushed screen',
         },
         options: {
           topBar: {
+            visible: true,
             drawBehind: true,
-            title: {
-              text: 'INNER TOPBAR',
-            },
           },
         },
+      },
+    });
+    Navigation.mergeOptions('MainStackId', {
+      topBar: {
+        title: {
+          text: 'YOUMUM',
+        },
+        visible: false,
+        drawBehind: true,
+        animate: false,
+        transparent: true,
+        translucent: true,
+        elevation: 0,
+        noBorder: true,
+        backButton: {
+          visible: true,
+        },
+        background: { color: 'transparent' },
       },
     });
   };
@@ -48,6 +91,7 @@ export default class Foo extends React.Component {
   toPushViewBottomLess = () => {
     Navigation.push('MainStackId', {
       component: {
+        // name: RouterConstants.SecondScreen,
         name: 'CorgeScreen',
         passProps: {
           text: 'Pushed screen',
@@ -57,6 +101,41 @@ export default class Foo extends React.Component {
         },
       },
     });
+  };
+
+  toModalView = () => {
+    // wrapper for icons
+    initIcons()
+      .then(() => {
+        Navigation.showModal({
+          stack: {
+            children: [
+              {
+                component: {
+                  name: 'QuuxScreen',
+                  options: {
+                    topBar: {
+                      visible: true,
+                      rightButtons: [
+                        {
+                          id: 'BtnQuuxTopBarRight',
+                          icon: closeIconAnt,
+                        },
+                      ],
+                      title: {
+                        text: 'Modal',
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   hideTopBar = () => {

@@ -4,6 +4,19 @@ import { Navigation } from 'react-native-navigation';
 import { styles } from './styles';
 
 export default class Bar extends React.Component {
+  // static options(passProps) {
+  //   return {
+  //     topBar: {
+  //       title: {
+  //         text: 'My Screen',
+  //       },
+  //       drawBehind: true,
+  //       visible: false,
+  //       animate: false,
+  //     },
+  //   };
+  // }
+  //
   componentDidMount() {
     this.navigationEventListener = Navigation.events().bindComponent(this);
   }
