@@ -24,57 +24,6 @@ export const startTabs = () => {
     });
 };
 
-const FooBottomTab = {
-  stack: {
-    id: 'FooStackId',
-    children: [
-      {
-        component: {
-          name: 'FooScreen',
-          options: {
-            bottomTab: {
-              fontSize: 12,
-              icon: visaIconFontAwesome,
-            },
-            topBar: {
-              visible: true,
-              animate: false,
-              title: {
-                text: 'FooScreen',
-              },
-            },
-          },
-        },
-      },
-    ],
-  },
-};
-
-const BarBottomTab = {
-  stack: {
-    id: 'BarStackId',
-    children: [
-      {
-        component: {
-          name: 'BarScreen',
-          options: {
-            bottomTab: {
-              fontSize: 12,
-              icon: paypalIconFontAwesome,
-            },
-            topBar: {
-              visible: true,
-              title: {
-                text: 'BarScreen',
-              },
-            },
-          },
-        },
-      },
-    ],
-  },
-};
-
 export const toMain = () => {
   // NOTE:
   // Set global topBar default to hide
@@ -103,68 +52,67 @@ export const toMain = () => {
             },
           },
         },
-        children: [FooBottomTab, BarBottomTab],
-        // children: [
-        //   {
-        //     bottomTabs: {
-        //       id: 'BottomTabsId',
-        //       children: [
-        //         {
-        //           // NOTE XXX XXX XXX XXX XXX XXX
-        //           // Stack Level 2, local level:
-        //           // { FooScreen || ... }
-        //           stack: {
-        //             id: 'FooStackId',
-        //             children: [
-        //               {
-        //                 component: {
-        //                   name: 'FooScreen',
-        //                   options: {
-        //                     bottomTab: {
-        //                       fontSize: 12,
-        //                       icon: visaIconFontAwesome,
-        //                     },
-        //                     topBar: {
-        //                       visible: true,
-        //                       animate: false,
-        //                       title: {
-        //                         text: 'FooScreen',
-        //                       },
-        //                     },
-        //                   },
-        //                 },
-        //               },
-        //             ],
-        //           },
-        //         },
-        //         {
-        //           stack: {
-        //             id: 'BarStackId',
-        //             children: [
-        //               {
-        //                 component: {
-        //                   name: 'BarScreen',
-        //                   options: {
-        //                     bottomTab: {
-        //                       fontSize: 12,
-        //                       icon: paypalIconFontAwesome,
-        //                     },
-        //                     topBar: {
-        //                       visible: true,
-        //                       title: {
-        //                         text: 'BarScreen',
-        //                       },
-        //                     },
-        //                   },
-        //                 },
-        //               },
-        //             ],
-        //           },
-        //         },
-        //       ],
-        //     },
-        //   },
-        // ],
+        children: [
+          {
+            bottomTabs: {
+              id: 'BottomTabsId',
+              children: [
+                {
+                  // NOTE XXX XXX XXX XXX XXX XXX
+                  // Stack Level 2, local level:
+                  // { FooScreen || ... }
+                  stack: {
+                    id: 'FooStackId',
+                    children: [
+                      {
+                        component: {
+                          name: 'FooScreen',
+                          options: {
+                            bottomTab: {
+                              fontSize: 12,
+                              icon: visaIconFontAwesome,
+                            },
+                            topBar: {
+                              visible: true,
+                              animate: false,
+                              title: {
+                                text: 'FooScreen',
+                              },
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  stack: {
+                    id: 'BarStackId',
+                    children: [
+                      {
+                        component: {
+                          name: 'BarScreen',
+                          options: {
+                            bottomTab: {
+                              fontSize: 12,
+                              icon: paypalIconFontAwesome,
+                            },
+                            topBar: {
+                              visible: true,
+                              title: {
+                                text: 'BarScreen',
+                              },
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
       },
     },
   });
