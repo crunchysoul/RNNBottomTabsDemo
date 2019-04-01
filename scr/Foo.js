@@ -10,6 +10,7 @@ import {
 import { Navigation } from 'react-native-navigation';
 import { styles } from './styles';
 import { initIcons } from './icons';
+import { RNN } from './screens';
 import { toBottomLess } from './navigation';
 import {
   MainStackTopBar,
@@ -29,7 +30,7 @@ export default class Foo extends React.Component {
   toPushView = () => {
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'CorgeScreen',
+        name: RNN.screen.Baz,
         options: {
           largeTitle: {
             visible: true,
@@ -54,16 +55,10 @@ export default class Foo extends React.Component {
   };
 
   toPushViewBottomLess = () => {
-    Navigation.push('MainStackId', {
+    Navigation.push(RNN.stack.App, {
       component: {
-        name: 'CorgeScreen',
+        name: RNN.screen.Baz,
         options: {
-          largeTitle: {
-            visible: true,
-            fontSize: 30,
-            color: 'red',
-            fontFamily: 'Helvetica',
-          },
           topBar: {
             visible: true,
             drawBehind: false,
@@ -87,29 +82,41 @@ export default class Foo extends React.Component {
         },
       },
     });
-    // Navigation.mergeOptions(this.props.componentId, {
-    //   component: {
-    //     name: 'CorgeScreen',
-    //     options: {
-    //       topBar: {
-    //         visible: true,
-    //         drawBehind: false,
-    //         animate: false,
-    //         background: {
-    //           color: 'white',
-    //           blur: true,
-    //         },
-    //         title: {
-    //           text: 'OVER TOPBAR',
-    //         },
-    //         backButton: {
-    //           visible: true,
-    //           text: 'test',
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
+  };
+
+  toModalView = () => {
+    // wrapper for icons
+    initIcons()
+      .then(() => {
+        Navigation.showModal({
+          stack: {
+            children: [
+              {
+                component: {
+                  name: RNN.screen.Baz,
+                  options: {
+                    topBar: {
+                      visible: true,
+                      rightButtons: [
+                        {
+                          id: RNN.btn.TopBar.right.Baz,
+                          icon: closeIconAnt,
+                        },
+                      ],
+                      title: {
+                        text: 'Modal',
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   render() {
@@ -121,6 +128,10 @@ export default class Foo extends React.Component {
           {this.constructor.name}
           .js
         </Text>
+
+        <TouchableOpacity onPress={this.toModalView} disabled={false}>
+          <Text style={styles.button}>Modal</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={this.toPushView}>
           <Text style={styles.button}>Push Under</Text>

@@ -8,6 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import { RNN } from './screens';
 import { styles } from './styles';
 import { initIcons } from './icons';
 import { toBottomLess } from './navigation';

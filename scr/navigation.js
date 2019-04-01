@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { registerScreens } from './screens';
+import { registerScreens, RNN } from './screens';
 import { initIcons } from './icons';
 import {
   MainStackTopBar,
@@ -34,11 +34,8 @@ export const toMain = () => {
 
   Navigation.setRoot({
     root: {
-      // NOTE XXX XXX XXX XXX XXX XXX
-      // Stack Level 1, global level:
-      // { bottomTabs || QuuxScreen }
       stack: {
-        id: 'MainStackId',
+        id: RNN.stack.App,
         options: {
           topBar: {
             visible: false,
@@ -55,18 +52,18 @@ export const toMain = () => {
         children: [
           {
             bottomTabs: {
-              id: 'BottomTabsId',
+              id: RNN.stack.BottomTabs,
               children: [
                 {
-                  // NOTE XXX XXX XXX XXX XXX XXX
-                  // Stack Level 2, local level:
-                  // { FooScreen || ... }
                   stack: {
-                    id: 'FooStackId',
+                    id: RNN.stack.Foo,
                     children: [
                       {
                         component: {
-                          name: 'FooScreen',
+                          // XXX: should component name and id be set to the
+                          // same?
+                          name: RNN.screen.Foo,
+                          id: RNN.screen.Foo,
                           options: {
                             bottomTab: {
                               fontSize: 12,
@@ -76,7 +73,7 @@ export const toMain = () => {
                               visible: true,
                               animate: false,
                               title: {
-                                text: 'FooScreen',
+                                text: RNN.screen.Foo,
                               },
                             },
                           },
@@ -87,11 +84,12 @@ export const toMain = () => {
                 },
                 {
                   stack: {
-                    id: 'BarStackId',
+                    id: RNN.stack.Bar,
                     children: [
                       {
                         component: {
-                          name: 'BarScreen',
+                          name: RNN.screen.Bar,
+                          id: RNN.screen.Bar,
                           options: {
                             bottomTab: {
                               fontSize: 12,
@@ -100,7 +98,7 @@ export const toMain = () => {
                             topBar: {
                               visible: true,
                               title: {
-                                text: 'BarScreen',
+                                text: RNN.screen.Bar,
                               },
                             },
                           },
