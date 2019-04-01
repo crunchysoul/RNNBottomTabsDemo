@@ -37,9 +37,9 @@ export const TestStackTopBar = {
   translucent: false,
   elevation: 0,
   noBorder: false,
-  background: { color: 'yellow' },
+  background: { color: 'white' },
   title: {
-    text: 'YOU MUM',
+    text: 'OVER TOPBAR',
   },
   backButton: {
     visible: true,
