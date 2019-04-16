@@ -120,6 +120,19 @@ export default class Foo extends React.Component {
       });
   };
 
+  toOverlay = () => {
+    Navigation.showOverlay({
+      component: {
+        name: RNN.screen.Qux,
+        options: {
+          overlay: {
+            interceptTouchOutside: true,
+          },
+        },
+      },
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -140,6 +153,10 @@ export default class Foo extends React.Component {
 
         <TouchableOpacity onPress={this.toPushViewBottomLess}>
           <Text style={styles.button}>Push Over</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.toOverlay}>
+          <Text style={styles.button}>Show Overlay</Text>
         </TouchableOpacity>
       </View>
     );

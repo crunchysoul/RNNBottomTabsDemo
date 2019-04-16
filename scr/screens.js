@@ -5,7 +5,7 @@ import Initial from './Initial';
 import Foo from './Foo';
 import Bar from './Bar';
 import Baz from './Baz';
-// import Qux from './Qux';
+import Qux from './Qux';
 // import Quux from './Quux';
 // import Quuz from './Quuz';
 // import Corge from './Corge';
@@ -17,7 +17,7 @@ export const RNN = {
     Foo: 'screen.Foo',
     Bar: 'screen.Bar',
     Baz: 'screen.Baz',
-    // Qux: 'screen.Qux',
+    Qux: 'screen.Qux',
     // Quux: 'screen.Quux',
     // Quuz: 'screen.Quuz',
     // Corge: 'screen.Corge',
@@ -46,4 +46,5 @@ export const registerScreens = () => {
   Navigation.registerComponent(RNN.screen.Foo, () => Foo);
   Navigation.registerComponent(RNN.screen.Bar, () => Bar);
   Navigation.registerComponent(RNN.screen.Baz, () => Baz);
+  Navigation.registerComponent(RNN.screen.Qux, () => Qux);
 };
