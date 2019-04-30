@@ -127,6 +127,7 @@ export default class Foo extends React.Component {
         options: {
           overlay: {
             interceptTouchOutside: true,
+            handleKeyboardEvents: true,
           },
         },
       },

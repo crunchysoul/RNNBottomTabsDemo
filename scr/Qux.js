@@ -11,6 +11,10 @@ const {
   TouchableOpacity,
 } = require('react-native');
 import { Navigation } from 'react-native-navigation';
+import ActionSheet from 'react-native-actionsheet';
+import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconIon from 'react-native-vector-icons/Ionicons';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import { RNN } from './screens';
 import {
   MainStackTopBar,
@@ -36,7 +40,7 @@ class Qux extends PureComponent {
     super(props);
     Navigation.events().bindComponent(this); // <== Will be automatically unregistered when unmounted
 
-    this.state = { headerBgColor: 'yellow', scrollY: 1 };
+    this.state = { headerBgColor: 'rgba(0, 0, 0, 0.5)', scrollY: 1 };
   }
 
   navigationButtonPressed = ({ buttonId }) => {
@@ -48,6 +52,10 @@ class Qux extends PureComponent {
         Navigation.dismissModal(this.props.componentId);
         break;
     }
+  };
+
+  showActionSheet = () => {
+    this.ActionSheet.show();
   };
 
   onPress = () => {
@@ -160,15 +168,6 @@ class Qux extends PureComponent {
     return (
       <View style={styles.root}>
         <View style={styles.container}>
-          <View
-            style={{
-              ...styles.header,
-              backgroundColor: this.state.headerBgColor,
-            }}
-          >
-            <Text>Lorem</Text>
-          </View>
-          <Text>Place holder</Text>
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.content}
@@ -179,6 +178,45 @@ class Qux extends PureComponent {
             {colors.map(this.renderRow)}
             {colors.map(this.renderRow)}
           </ScrollView>
+          <View
+            style={{
+              ...styles.header,
+              backgroundColor: this.state.headerBgColor,
+            }}
+          >
+            <TouchableOpacity
+              onPress={this.onPress}
+              style={{
+                width: 16 * 2 + 30,
+                borderTopLeftRadius: 16,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <IconAnt name="close" size={30} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.showActionSheet}
+              style={{
+                width: 16 * 2 + 30,
+                borderRightRadius: 16,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <IconEntypo name="dots-three-horizontal" size={30} color="#fff" />
+              <ActionSheet
+                ref={(o) => (this.ActionSheet = o)}
+                title={'Which one do you like ?'}
+                options={['Apple', 'Banana', 'cancel']}
+                cancelButtonIndex={2}
+                destructiveButtonIndex={1}
+                onPress={(index) => {
+                  /* do something */
+                }}
+              />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             onPress={this.onPress}
             style={styles.buttonContainer}
@@ -235,8 +273,7 @@ const styles = StyleSheet.create({
   scrollView: {
     // backgroundColor: 'blue',
     backgroundColor: 'white',
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
+    borderRadius: 16,
   },
   row: {
     height: 80,
@@ -262,7 +299,12 @@ const styles = StyleSheet.create({
     height: 62,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
-    justifyContent: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: Dimensions.get('window').width - 28,
+    position: 'absolute',
+    top: 0,
   },
   footer: {
     fontSize: 10,
