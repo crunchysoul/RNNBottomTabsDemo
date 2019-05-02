@@ -16,13 +16,6 @@ import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconIon from 'react-native-vector-icons/Ionicons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import { RNN } from './screens';
-import {
-  MainStackTopBar,
-  TestStackTopBar,
-  TestFooStackTopBar,
-  HideBar,
-  InvisiableStackTopBar,
-} from './MainStackTopBar';
 
 const colors = [
   '#3182C8',
@@ -40,7 +33,34 @@ class Qux extends PureComponent {
     super(props);
     Navigation.events().bindComponent(this); // <== Will be automatically unregistered when unmounted
 
-    this.state = { headerBgColor: 'rgba(0, 0, 0, 0.5)', scrollY: 1 };
+    this.state = {
+      headerBgColor: 'rgba(0, 0, 0, 0.5)',
+      scrollY: 1,
+      fadeAnimRoot: new Animated.Value(0), // Initial value for opacity: 0
+      fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
+    };
+  }
+
+  componentDidMount() {
+    Animated.timing(
+      // Animate over time
+      this.state.fadeAnimRoot, // The animated value to drive
+      {
+        toValue: 1, // Animate to opacity: 1 (opaque)
+        duration: 1, // Make it take a while
+        useNativeDriver: true, // Send everything about the animation to native before starting
+      },
+    ).start(); // Starts the animation
+
+    Animated.timing(
+      // Animate over time
+      this.state.fadeAnim, // The animated value to drive
+      {
+        toValue: 1, // Animate to opacity: 1 (opaque)
+        duration: 1000, // Make it take a while
+        useNativeDriver: true, // Send everything about the animation to native before starting
+      },
+    ).start(); // Starts the animation
   }
 
   navigationButtonPressed = ({ buttonId }) => {
@@ -165,9 +185,25 @@ class Qux extends PureComponent {
   // };
 
   render() {
+    let { fadeAnimRoot, fadeAnim } = this.state;
+
     return (
-      <View style={styles.root}>
-        <View style={styles.container}>
+      // <View style={styles.root}>
+      <Animated.View // Special animatable View
+        style={{
+          ...styles.root,
+          opacity: fadeAnimRoot, // Bind opacity to animated value
+        }}
+      >
+        <Animated.View // Special animatable View
+          style={[
+            styles.container,
+            {
+              opacity: fadeAnim, // Bind opacity to animated value
+            },
+          ]}
+        >
+          {/* <View style={styles.container}> */}
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.content}
@@ -223,8 +259,9 @@ class Qux extends PureComponent {
           >
             <Text style={styles.button}>Close Overlay</Text>
           </TouchableOpacity>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
+      // </View>
     );
   }
 
