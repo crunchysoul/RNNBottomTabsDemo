@@ -41,6 +41,10 @@ class Qux extends PureComponent {
     };
   }
 
+  componentWillMount() {
+    this._animatedValue = new Animated.Value(0);
+  }
+
   componentDidMount() {
     Animated.timing(
       // Animate over time
@@ -187,19 +191,37 @@ class Qux extends PureComponent {
   render() {
     let { fadeAnimRoot, fadeAnim } = this.state;
 
+    const interpolatedColor = this._animatedValue.interpolate({
+      inputRange: [0, 1500],
+      outputRange: ['rgba(255,255,255,0)', 'rgba(0,0,0,1)'],
+      extrapolate: 'clamp',
+    });
+
+    const event = Animated.event([
+      {
+        nativeEvent: {
+          contentOffset: {
+            y: this._animatedValue,
+          },
+        },
+      },
+    ]);
+
     return (
       // <View style={styles.root}>
       <Animated.View // Special animatable View
         style={{
           ...styles.root,
-          opacity: fadeAnimRoot, // Bind opacity to animated value
+          // opacity: fadeAnimRoot, // Bind opacity to animated value
+          // backgroundColor: interpolatedColor,
         }}
       >
         <Animated.View // Special animatable View
           style={[
             styles.container,
             {
-              opacity: fadeAnim, // Bind opacity to animated value
+              // opacity: fadeAnim, // Bind opacity to animated value
+              // backgroundColor: interpolatedColor,
             },
           ]}
         >
@@ -207,17 +229,17 @@ class Qux extends PureComponent {
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.content}
-            onScroll={this.onScroll}
+            onScroll={event}
             scrollEventThrottle={1}
           >
             {colors.map(this.renderRow)}
             {colors.map(this.renderRow)}
             {colors.map(this.renderRow)}
           </ScrollView>
-          <View
+          <Animated.View
             style={{
               ...styles.header,
-              backgroundColor: this.state.headerBgColor,
+              backgroundColor: interpolatedColor,
             }}
           >
             <TouchableOpacity
@@ -252,7 +274,7 @@ class Qux extends PureComponent {
                 }}
               />
             </TouchableOpacity>
-          </View>
+          </Animated.View>
           <TouchableOpacity
             onPress={this.onPress}
             style={styles.buttonContainer}
