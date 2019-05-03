@@ -34,11 +34,10 @@ class Qux extends PureComponent {
     Navigation.events().bindComponent(this); // <== Will be automatically unregistered when unmounted
 
     this.state = {
-      headerBgColor: 'rgba(0, 0, 0, 0.5)',
-      scrollY: 1,
+      // headerBgColor: 'rgba(0, 0, 0, 0.5)',
       fadeAnimRoot: new Animated.Value(0), // Initial value for opacity: 0
       fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
-      _animatedValue: new Animated.Value(0),
+      scrollY: new Animated.Value(0),
     };
   }
 
@@ -53,15 +52,11 @@ class Qux extends PureComponent {
       },
     ).start(); // Starts the animation
 
-    Animated.timing(
-      // Animate over time
-      this.state.fadeAnim, // The animated value to drive
-      {
-        toValue: 1, // Animate to opacity: 1 (opaque)
-        duration: 1000, // Make it take a while
-        useNativeDriver: true, // Send everything about the animation to native before starting
-      },
-    ).start(); // Starts the animation
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
   }
 
   navigationButtonPressed = ({ buttonId }) => {
@@ -83,49 +78,51 @@ class Qux extends PureComponent {
     Navigation.dismissOverlay(this.props.componentId);
   };
 
-  onScroll = () => {
-    // console.log(event.nativeEvent.contentOffset.y);
-    Animated.event([
-      // { nativeEvent: { contentOffset: { y: this.state.scrollY } } },
-      { nativeEvent: { contentOffset: { y: this.state._animatedValue } } },
-    ]);
+  handleOnScroll = (e) => {
+    const y = e.nativeEvent.contentOffset.y;
+    console.log('----------------', y);
   };
 
   render() {
-    let { fadeAnimRoot, fadeAnim } = this.state;
-    const interpolatedColor = this.state._animatedValue.interpolate({
+    const { fadeAnimRoot, fadeAnim, scrollY } = this.state;
+    const onScroll = Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              y: scrollY,
+            },
+          },
+        },
+      ],
+      {
+        useNativeDriver: true,
+        listener: this.handleOnScroll,
+      },
+    );
+    const headerBgOpacity = scrollY.interpolate({
       inputRange: [0, 200],
-      outputRange: ['rgba(255,255,255,0)', 'rgba(0,0,0,1)'],
+      outputRange: [0, 1],
       extrapolate: 'clamp',
     });
 
-    const event = Animated.event([
-      {
-        nativeEvent: {
-          contentOffset: {
-            y: this.state._animatedValue,
-          },
-        },
-      },
-    ]);
-
     return (
       <View style={styles.root}>
-        <View style={styles.container}>
-          <ScrollView
+        <Animated.View style={[styles.container]}>
+          <Animated.ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.content}
-            onScroll={this.onScroll}
+            onScroll={onScroll}
             scrollEventThrottle={1}
           >
             {colors.map(this.renderRow)}
             {colors.map(this.renderRow)}
             {colors.map(this.renderRow)}
-          </ScrollView>
+          </Animated.ScrollView>
           <Animated.View
             style={{
               ...styles.header,
-              backgroundColor: interpolatedColor,
+              opacity: headerBgOpacity,
             }}
           >
             <TouchableOpacity
@@ -167,7 +164,7 @@ class Qux extends PureComponent {
           >
             <Text style={styles.button}>Close Overlay</Text>
           </TouchableOpacity>
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -215,7 +212,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   scrollView: {
-    // backgroundColor: 'blue',
     backgroundColor: 'white',
     borderRadius: 16,
   },
@@ -226,7 +222,6 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   content: {
-    // backgroundColor: 'blue',
     backgroundColor: 'white',
   },
   h1: {
@@ -249,6 +244,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 28,
     position: 'absolute',
     top: 0,
+    backgroundColor: 'black',
   },
   footer: {
     fontSize: 10,
