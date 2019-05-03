@@ -38,11 +38,8 @@ class Qux extends PureComponent {
       scrollY: 1,
       fadeAnimRoot: new Animated.Value(0), // Initial value for opacity: 0
       fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
+      _animatedValue: new Animated.Value(0),
     };
-  }
-
-  componentWillMount() {
-    this._animatedValue = new Animated.Value(0);
   }
 
   componentDidMount() {
@@ -87,112 +84,17 @@ class Qux extends PureComponent {
   };
 
   onScroll = () => {
+    // console.log(event.nativeEvent.contentOffset.y);
     Animated.event([
-      { nativeEvent: { contentOffset: { y: this.state.scrollY } } },
+      // { nativeEvent: { contentOffset: { y: this.state.scrollY } } },
+      { nativeEvent: { contentOffset: { y: this.state._animatedValue } } },
     ]);
   };
 
-  // onScroll = (event) => {
-  //   console.log(event.nativeEvent.contentOffset.y);
-  //
-  //   // NOTE: for graduate changing background opacity
-  //   event.nativeEvent.contentOffset.y <= 0
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 1)',
-  //       })
-  //     : null;
-  //
-  //   0 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 5
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.99)',
-  //       })
-  //     : null;
-  //
-  //   5 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 10
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.98)',
-  //       })
-  //     : null;
-  //
-  //   10 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 20
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.97)',
-  //       })
-  //     : null;
-  //
-  //   20 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 30
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.96)',
-  //       })
-  //     : null;
-  //
-  //   30 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 40
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.95)',
-  //       })
-  //     : null;
-  //
-  //   40 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 50
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.94)',
-  //       })
-  //     : null;
-  //
-  //   50 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 60
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.93)',
-  //       })
-  //     : null;
-  //
-  //   60 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 70
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.92)',
-  //       })
-  //     : null;
-  //
-  //   70 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 80
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.91)',
-  //       })
-  //     : null;
-  //
-  //   80 < event.nativeEvent.contentOffset.y &&
-  //   event.nativeEvent.contentOffset.y <= 90
-  //     ? this.setState({
-  //         headerBgColor: 'rgba(0, 0, 0, 0.90)',
-  //       })
-  //     : null;
-  //   // this.state.headerBgColor === 'yellow'
-  //   //   ? this.setState({
-  //   //       // headerBgColor: 'rgba(255, 255, 0, 0.3)',
-  //   //       headerBgColor: 'pink',
-  //   //     })
-  //   //   : null;
-  // };
-
-  // onScrollBeginDrag = () => {
-  //   this.state.headerBgColor === 'yellow'
-  //     ? this.setState({
-  //         // headerBgColor: 'rgba(255, 255, 0, 0.3)',
-  //         headerBgColor: 'pink',
-  //       })
-  //     : null;
-  // };
-
   render() {
     let { fadeAnimRoot, fadeAnim } = this.state;
-
-    const interpolatedColor = this._animatedValue.interpolate({
-      inputRange: [0, 1500],
+    const interpolatedColor = this.state._animatedValue.interpolate({
+      inputRange: [0, 200],
       outputRange: ['rgba(255,255,255,0)', 'rgba(0,0,0,1)'],
       extrapolate: 'clamp',
     });
@@ -201,35 +103,19 @@ class Qux extends PureComponent {
       {
         nativeEvent: {
           contentOffset: {
-            y: this._animatedValue,
+            y: this.state._animatedValue,
           },
         },
       },
     ]);
 
     return (
-      // <View style={styles.root}>
-      <Animated.View // Special animatable View
-        style={{
-          ...styles.root,
-          // opacity: fadeAnimRoot, // Bind opacity to animated value
-          // backgroundColor: interpolatedColor,
-        }}
-      >
-        <Animated.View // Special animatable View
-          style={[
-            styles.container,
-            {
-              // opacity: fadeAnim, // Bind opacity to animated value
-              // backgroundColor: interpolatedColor,
-            },
-          ]}
-        >
-          {/* <View style={styles.container}> */}
+      <View style={styles.root}>
+        <View style={styles.container}>
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.content}
-            onScroll={event}
+            onScroll={this.onScroll}
             scrollEventThrottle={1}
           >
             {colors.map(this.renderRow)}
@@ -281,9 +167,8 @@ class Qux extends PureComponent {
           >
             <Text style={styles.button}>Close Overlay</Text>
           </TouchableOpacity>
-        </Animated.View>
-      </Animated.View>
-      // </View>
+        </View>
+      </View>
     );
   }
 
